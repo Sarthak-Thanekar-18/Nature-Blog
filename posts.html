@@ -1,0 +1,925 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nature Resources &amp; Links</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&amp;family=Playfair+Display:wght@700&amp;display=swap" rel="stylesheet">
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 50%, #e0f2f1 100%);
+      color: #2c3e50;
+      overflow-x: hidden;
+    }
+
+    .hero-banner {
+      position: relative;
+      width: 100%;
+      height: 400px;
+      background: linear-gradient(rgba(46, 125, 50, 0.7), rgba(46, 125, 50, 0.85)),
+                  url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1600&q=80');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      margin-bottom: 4rem;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 1rem;
+      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+      letter-spacing: 2px;
+    }
+
+    .page-subtitle {
+      font-size: 1.4rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.95);
+      max-width: 700px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+    }
+
+    .section-intro {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-intro h2 {
+      font-size: 2.5rem;
+      color: #2e7d32;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .section-intro p {
+      font-size: 1.1rem;
+      color: #546e7a;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2.5rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      border: 1px solid rgba(76, 175, 80, 0.1);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #4CAF50, #81C784, #4CAF50);
+      background-size: 200% 100%;
+      transform: scaleX(0);
+      transition: all 0.5s ease;
+    }
+
+    .card:hover::before {
+      transform: scaleX(1);
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    .card:hover {
+      transform: translateY(-15px) scale(1.03);
+      box-shadow: 0 25px 70px rgba(76, 175, 80, 0.25);
+      border-color: rgba(76, 175, 80, 0.3);
+    }
+
+    .card-image {
+      width: 100%;
+      height: 240px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-image::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent);
+    }
+
+    .card-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: rgba(255, 255, 255, 0.95);
+      color: #2e7d32;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      z-index: 2;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .card:nth-child(1) .card-image {
+      background-image: url('https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=800&q=80');
+    }
+
+    .card:nth-child(2) .card-image {
+      background-image: url('https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=800&q=80');
+    }
+
+    .card:nth-child(3) .card-image {
+      background-image: url('https://images.unsplash.com/photo-1511497584788-876760111969?w=800&q=80');
+    }
+
+    .card:nth-child(4) .card-image {
+      background-image: url('https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=800&q=80');
+    }
+
+    .card:nth-child(5) .card-image {
+      background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80');
+    }
+
+    .card:nth-child(6) .card-image {
+      background-image: url('https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=800&q=80');
+    }
+
+    .card:nth-child(7) .card-image {
+      background-image: url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80');
+    }
+
+    .card:nth-child(8) .card-image {
+      background-image: url('https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80');
+    }
+
+    .card:nth-child(9) .card-image {
+      background-image: url('https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&q=80');
+    }
+
+    .card:nth-child(10) .card-image {
+      background-image: url('https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=800&q=80');
+    }
+
+    .card:nth-child(11) .card-image {
+      background-image: url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&q=80');
+    }
+
+    .card:nth-child(12) .card-image {
+      background-image: url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&q=80');
+    }
+
+    .card-content {
+      padding: 2rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .card-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #2e7d32;
+      line-height: 1.3;
+      flex: 1;
+    }
+
+    .card-rating {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.9rem;
+      color: #FFA726;
+      font-weight: 600;
+      margin-left: 1rem;
+      white-space: nowrap;
+    }
+
+    .card-meta {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .card-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      color: #78909c;
+      font-weight: 500;
+    }
+
+    .card-meta-icon {
+      font-size: 1rem;
+    }
+
+    .card-description {
+      font-size: 1rem;
+      font-weight: 400;
+      color: #546e7a;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+
+    .card-tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .card-tag {
+      padding: 0.4rem 0.8rem;
+      background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+      color: #2e7d32;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border: 1px solid rgba(76, 175, 80, 0.2);
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1rem;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .card-button {
+      padding: 0.85rem 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: white;
+      background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+    }
+
+    .card-button:hover {
+      background: linear-gradient(135deg, #45a049 0%, #5cb85c 100%);
+      transform: translateX(5px);
+      box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+    }
+
+    .card-button::after {
+      content: '→';
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+
+    .card-button:hover::after {
+      transform: translateX(4px);
+    }
+
+    .stats-banner {
+      background: linear-gradient(135deg, #2e7d32 0%, #4CAF50 100%);
+      color: white;
+      padding: 3rem 2rem;
+      margin: 4rem 0;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 10px 40px rgba(46, 125, 50, 0.3);
+    }
+
+    .stats-banner h3 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      font-weight: 700;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .stat-item {
+      padding: 1.5rem;
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    @media (max-width: 1024px) {
+      .cards-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-banner {
+        height: 300px;
+      }
+
+      .page-title {
+        font-size: 2.5rem;
+      }
+
+      .page-subtitle {
+        font-size: 1.1rem;
+      }
+
+      .container {
+        padding: 0 1rem 3rem;
+      }
+
+      .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .card-image {
+        height: 200px;
+      }
+
+      .section-intro h2 {
+        font-size: 2rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .page-title {
+        font-size: 2rem;
+      }
+
+      .card-title {
+        font-size: 1.4rem;
+      }
+
+      .card-description {
+        font-size: 0.95rem;
+      }
+
+      .card-content {
+        padding: 1.5rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <header class="hero-banner">
+   <h1 class="page-title" id="page-title">Nature Resources &amp; Links</h1>
+   <p class="page-subtitle" id="page-subtitle">Discover amazing nature websites and resources</p>
+  </header>
+  <main class="container">
+   <section class="section-intro">
+    <h2>🌿 Explore the Best Nature Websites</h2>
+    <p>Curated collection of the world's leading environmental organizations, conservation groups, and nature education platforms</p>
+   </section>
+   <div class="cards-grid">
+    <article class="card">
+     <div class="card-image"><span class="card-badge">Featured</span>
+     </div>
+     <div class="card-content">
+      <div class="card-header">
+       <h2 class="card-title" data-card="1">National Geographic</h2>
+       <div class="card-rating">
+        ⭐ 4.9
+       </div>
+      </div>
+      <div class="card-meta"><span class="card-meta-item"><span class="card-meta-icon">🌍</span> Global</span> <span class="card-meta-item"><span class="card-meta-icon">📚</span> Educational</span>
+      </div>
+      <div class="card-tags"><span class="card-tag">Wildlife</span> <span class="card-tag">Photography</span> <span class="card-tag">Documentary</span>
+      </div>
+      <p class="card-description" data-card="1">Explore stunning wildlife photography and nature documentaries</p>
+      <div class="card-footer"><button class="card-button" data-url="https://www.nationalgeographic.com">Visit Website</button>
+      </div>
+     </div>
+    </article>
+    <article class="card">
+     <div class="card-image"><span class="card-badge">Science</span>
+     </div>
+     <div class="card-content">
+      <div class="card-header">
+       <h2 class="card-title" data-card="2">Earth Observatory</h2>
+       <div class="card-rating">
+        ⭐ 4.8
+       </div>
+      </div>
+      <div class="card-meta"><span class="card-meta-item"><span class="card-meta-icon">🛰️</span> NASA</span> <span class="card-meta-item"><span class="card-meta-icon">🔬</span> Research</span>
+      </div>
+      <div class="card-tags"><span class="card-tag">Satellite</span> <span class="card-tag">Climate</span>
+      </div>
+      <p class="card-description" data-card="2">NASA's view of Earth from space with satellite imagery</p>
+      <div class="card-footer"><button class="card-button" data-url="https://earthobservatory.nasa.gov">Visit Website</button>
+      </div>
+     </div>
+    </article>
+    <article class="card">
+     <div class="card-image"><span class="card-badge">Conservation</span>
+     </div>
+     <div class="card-content">
+      <div class="card-header">
+       <h2 class="card-title" data-card="3">The Nature Conservancy</h2>
+       <div class="card-rating">
+        ⭐ 4.9
+       </div>
+      </div>
+      <div class="card-meta"><span class="card-meta-item"><span class="card-meta-icon">🌳</span> Non-Profit</span> <span class="card-meta-item"><span class="card-meta-icon">🌎</span> 70+ Countries</span>
+      </div>
+      <div class="card-tags"><span class="card-tag">Conservation</span> <span class="card-tag">Habitat</span>
+      </div>
+      <p class="card-description" data-card="3">Conservation efforts and environmental protection initiatives</p>
+      <div class="card-footer"><button class="card-button" data-url="https://www.nature.org">Visit Website</button>
+      </div>
+     </div>
+    </article>
+    <article class="card">
+     <div class="card-image"><span class="card-badge">Wildlife</span>
+     </div>
+     <div class="card-content">
+      <div class="card-header">
+       <h2 class="card-title" data-card="4">World Wildlife Fund</h2>
+       <div class="card-rating">
+        ⭐ 4.9
+       </div>
+      </div>
+      <div class="card-meta"><span class="card-meta-item"><span class="card-meta-icon">🐼</span> Iconic</span> <span class="card-meta-item"><span class="card-meta-icon">💚</span> Trusted</span>
+      </div>
+      <div class="card-tags"><span class="card-tag">Endangered</span> <span class="card-tag">Protection</span>
+      </div>
+      <p class="card-description" data-card="4">Wildlife conservation and endangered species protection</p>
+      <div class="card-footer"><button class="card-button" data-url="https://www.worldwildlife.org">Visit Website</button>
+      </div>
+     </div>
+    </article>
+    <article class="card">
+     <div class="card-image"><span class="card-badge">Photography</span>
+     </div>
+     <div class="card-content">
+      <div class="card-header">
+       <h2 class="card-title" data-card="5">Outdoor Photography</h2>
+       <div class="card-rating">
+        ⭐ 4.7
+       </div>
+      </div>
+      <div class="card-meta"><span class="card-meta-item"><span class="card-meta-icon">📷</span> Magazine</span> <span class="card-meta-item"><span class="card-meta-icon">🎨</span> Creative</span>
+      </div>
+      <div class="card-tags"><span class="card-tag">Landscape</span> <span class="card-tag">Tips</span>
+      </div>
+      <p class="card-description" data-card="5">Tips and inspiration for nature and landscape photography</p>
+      <div class="card-footer"><button class="card-button" data-url="https://www.outdoorphotographer.com">Visit Website</button>
+      </div>
+     </div>
+    </article>
+    <article class="card">
+     <div class="card-image"><span class="card-badge">Relaxation</span>
+     </div>
+     <div class="card-content">
+      <div class="card-header">
+       <h2 class="card-title" data-card="6">Nature Sounds</h2>
+       <div class="card-rating">
+        ⭐ 4.8
+       </div>
+      </div>
+      <div class="card-meta"><span class="card-meta-item"><span class="card-meta-icon">🎵</span> Audio</span> <span class="card-meta-item"><span class="card-meta-icon">🧘</span> Wellness</span>
+      </div>
+      <div class="card-tags"><span class="card-tag">Meditation</span> <span class="card-tag">Sleep</span>
+      </div>
+      <p class="card-description" data-card="6">Relaxing natural soundscapes from forests and oceans</p>
+      <div class="card-footer"><button class="card-button" data-url="https://www.naturesoundsfor.me">Visit Website</button>
+      </div>
+     </div>
+    </article>
+    <article class="card">
+     <div class="card-image"><span class="card-badge">Ocean</span>
+     </div>
+     <div class="card-content">
+      <div class="card-header">
+       <h2 class="card-title" data-card="7">Ocean Conservancy</h2>
+       <div class="card-rating">
+        ⭐ 4.8
+       </div>
+      </div>
+      <div class="card-meta"><span class="card-meta-item"><span class="card-meta-icon">🌊</span> Marine</span> <span class="card-meta-item"><span class="card-meta-icon">♻️</span> Clean Seas</span>
+      </div>
+      <div class="card-tags"><span class="card-tag">Ocean</span> <span class="card-tag">Plastic</span>
+      </div>
+      <p class="card-description" data-card="7">Protecting ocean ecosystems and marine life worldwide</p>
+      <div class="card-footer"><button class="card-button" data-url="https://oceanconservancy.org">Visit Website</button>
+      </div>
+     </div>
+    </article>
+    <article class="card">
+     <div class="card-image"><span class="card-badge">Rainforest</span>
+     </div>
+     <div class="card-content">
+      <div class="card-header">
+       <h2 class="card-title" data-card="8">Rainforest Alliance</h2>
+       <div class="card-rating">
+        ⭐ 4.7
+       </div>
+      </div>
+      <div class="card-meta"><span class="card-meta-item"><span class="card-meta-icon">🌴</span> Tropical</span> <span class="card-meta-item"><span class="card-meta-icon">🌱</span> Sustainable</span>
+      </div>
+      <div class="card-tags"><span class="card-tag">Forestry</span> <span class="card-tag">Biodiversity</span>
+      </div>
+      <p class="card-description" data-card="8">Sustainable forestry and biodiversity conservation</p>
+      <div class="card-footer"><button class="card-button" data-url="https://www.rainforest-alliance.org">Visit Website</button>
+      </div>
+     </div>
+    </article>
+    <article class="card">
+     <div class="card-image"><span class="card-badge">Birds</span>
+     </div>
+     <div class="card-content">
+      <div class="card-header">
+       <h2 class="card-title" data-card="9">Audubon Society</h2>
+       <div class="card-rating">
+        ⭐ 4.8
+       </div>
+      </div>
+      <div class="card-meta"><span class="card-meta-item"><span class="card-meta-icon">🦅</span> Avian</span> <span class="card-meta-item"><span class="card-meta-icon">🏞️</span> Habitat</span>
+      </div>
+      <div class="card-tags"><span class="card-tag">Birds</span> <span class="card-tag">Migration</span>
+      </div>
+      <p class="card-description" data-card="9">Bird conservation and habitat protection programs</p>
+      <div class="card-footer"><button class="card-button" data-url="https://www.audubon.org">Visit Website</button>
+      </div>
+     </div>
+    </article>
+    <article class="card">
+     <div class="card-image"><span class="card-badge">Adventure</span>
+     </div>
+     <div class="card-content">
+      <div class="card-header">
+       <h2 class="card-title" data-card="10">Sierra Club</h2>
+       <div class="card-rating">
+        ⭐ 4.7
+       </div>
+      </div>
+      <div class="card-meta"><span class="card-meta-item"><span class="card-meta-icon">⛰️</span> Outdoors</span> <span class="card-meta-item"><span class="card-meta-icon">🥾</span> Hiking</span>
+      </div>
+      <div class="card-tags"><span class="card-tag">Adventure</span> <span class="card-tag">Advocacy</span>
+      </div>
+      <p class="card-description" data-card="10">Outdoor adventures and environmental advocacy</p>
+      <div class="card-footer"><button class="card-button" data-url="https://www.sierraclub.org">Visit Website</button>
+      </div>
+     </div>
+    </article>
+    <article class="card">
+     <div class="card-image"><span class="card-badge">Activism</span>
+     </div>
+     <div class="card-content">
+      <div class="card-header">
+       <h2 class="card-title" data-card="11">Greenpeace</h2>
+       <div class="card-rating">
+        ⭐ 4.6
+       </div>
+      </div>
+      <div class="card-meta"><span class="card-meta-item"><span class="card-meta-icon">✊</span> Activism</span> <span class="card-meta-item"><span class="card-meta-icon">🌡️</span> Climate</span>
+      </div>
+      <div class="card-tags"><span class="card-tag">Global</span> <span class="card-tag">Action</span>
+      </div>
+      <p class="card-description" data-card="11">Global environmental activism and climate action</p>
+      <div class="card-footer"><button class="card-button" data-url="https://www.greenpeace.org">Visit Website</button>
+      </div>
+     </div>
+    </article>
+    <article class="card">
+     <div class="card-image"><span class="card-badge">Documentary</span>
+     </div>
+     <div class="card-content">
+      <div class="card-header">
+       <h2 class="card-title" data-card="12">Planet Earth</h2>
+       <div class="card-rating">
+        ⭐ 5.0
+       </div>
+      </div>
+      <div class="card-meta"><span class="card-meta-item"><span class="card-meta-icon">🎬</span> BBC</span> <span class="card-meta-item"><span class="card-meta-icon">🏆</span> Award-Winning</span>
+      </div>
+      <div class="card-tags"><span class="card-tag">Documentary</span> <span class="card-tag">4K</span>
+      </div>
+      <p class="card-description" data-card="12">BBC's breathtaking nature documentary series</p>
+      <div class="card-footer"><button class="card-button" data-url="https://www.bbcearth.com">Visit Website</button>
+      </div>
+     </div>
+    </article>
+   </div>
+   <aside class="stats-banner">
+    <h3>🌍 Making a Difference Together</h3>
+    <div class="stats-grid">
+     <div class="stat-item">
+      <div class="stat-number">
+       12
+      </div>
+      <div class="stat-label">
+       Trusted Resources
+      </div>
+     </div>
+     <div class="stat-item">
+      <div class="stat-number">
+       100+
+      </div>
+      <div class="stat-label">
+       Countries Covered
+      </div>
+     </div>
+     <div class="stat-item">
+      <div class="stat-number">
+       1M+
+      </div>
+      <div class="stat-label">
+       Species Protected
+      </div>
+     </div>
+     <div class="stat-item">
+      <div class="stat-number">
+       24/7
+      </div>
+      <div class="stat-label">
+       Access Available
+      </div>
+     </div>
+    </div>
+   </aside>
+  </main>
+  <script>
+    const defaultConfig = {
+      page_title: "Nature Resources & Links",
+      page_subtitle: "Discover amazing nature websites and resources",
+      card1_title: "National Geographic",
+      card1_description: "Explore stunning wildlife photography and nature documentaries",
+      card2_title: "Earth Observatory",
+      card2_description: "NASA's view of Earth from space with satellite imagery",
+      card3_title: "The Nature Conservancy",
+      card3_description: "Conservation efforts and environmental protection initiatives",
+      card4_title: "World Wildlife Fund",
+      card4_description: "Wildlife conservation and endangered species protection",
+      card5_title: "Outdoor Photography",
+      card5_description: "Tips and inspiration for nature and landscape photography",
+      card6_title: "Nature Sounds",
+      card6_description: "Relaxing natural soundscapes from forests and oceans",
+      card7_title: "Ocean Conservancy",
+      card7_description: "Protecting ocean ecosystems and marine life worldwide",
+      card8_title: "Rainforest Alliance",
+      card8_description: "Sustainable forestry and biodiversity conservation",
+      card9_title: "Audubon Society",
+      card9_description: "Bird conservation and habitat protection programs",
+      card10_title: "Sierra Club",
+      card10_description: "Outdoor adventures and environmental advocacy",
+      card11_title: "Greenpeace",
+      card11_description: "Global environmental activism and climate action",
+      card12_title: "Planet Earth",
+      card12_description: "BBC's breathtaking nature documentary series",
+      button_text: "Visit Website",
+      background_color: "#e8f5e9",
+      card_background: "#ffffff",
+      primary_color: "#4CAF50",
+      title_color: "#2e7d32",
+      text_color: "#546e7a",
+      font_family: "Poppins",
+      font_size: 16
+    };
+
+    async function onConfigChange(config) {
+      const customFont = config.font_family || defaultConfig.font_family;
+      const baseFontSize = config.font_size || defaultConfig.font_size;
+      const baseFontStack = 'sans-serif';
+
+      document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
+
+      const pageTitle = document.getElementById('page-title');
+      const pageSubtitle = document.getElementById('page-subtitle');
+
+      if (pageTitle) {
+        pageTitle.textContent = config.page_title || defaultConfig.page_title;
+        pageTitle.style.fontSize = `${baseFontSize * 4}px`;
+      }
+
+      if (pageSubtitle) {
+        pageSubtitle.textContent = config.page_subtitle || defaultConfig.page_subtitle;
+        pageSubtitle.style.fontSize = `${baseFontSize * 1.4}px`;
+      }
+
+      for (let i = 1; i <= 12; i++) {
+        const cardTitle = document.querySelector(`.card-title[data-card="${i}"]`);
+        const cardDescription = document.querySelector(`.card-description[data-card="${i}"]`);
+
+        if (cardTitle) {
+          cardTitle.textContent = config[`card${i}_title`] || defaultConfig[`card${i}_title`];
+          cardTitle.style.fontSize = `${baseFontSize * 1.6}px`;
+          cardTitle.style.color = config.title_color || defaultConfig.title_color;
+        }
+
+        if (cardDescription) {
+          cardDescription.textContent = config[`card${i}_description`] || defaultConfig[`card${i}_description`];
+          cardDescription.style.fontSize = `${baseFontSize}px`;
+          cardDescription.style.color = config.text_color || defaultConfig.text_color;
+        }
+      }
+
+      const buttons = document.querySelectorAll('.card-button');
+      buttons.forEach(button => {
+        button.textContent = config.button_text || defaultConfig.button_text;
+        button.style.fontSize = `${baseFontSize}px`;
+      });
+
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        card.style.backgroundColor = config.card_background || defaultConfig.card_background;
+      });
+
+      document.body.style.background = `linear-gradient(135deg, ${config.background_color || defaultConfig.background_color} 0%, #f1f8e9 50%, #e0f2f1 100%)`;
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (value) => {
+              config.background_color = value;
+              window.elementSdk.setConfig({ background_color: value });
+            }
+          },
+          {
+            get: () => config.card_background || defaultConfig.card_background,
+            set: (value) => {
+              config.card_background = value;
+              window.elementSdk.setConfig({ card_background: value });
+            }
+          },
+          {
+            get: () => config.primary_color || defaultConfig.primary_color,
+            set: (value) => {
+              config.primary_color = value;
+              window.elementSdk.setConfig({ primary_color: value });
+            }
+          },
+          {
+            get: () => config.title_color || defaultConfig.title_color,
+            set: (value) => {
+              config.title_color = value;
+              window.elementSdk.setConfig({ title_color: value });
+            }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (value) => {
+              config.text_color = value;
+              window.elementSdk.setConfig({ text_color: value });
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: {
+          get: () => config.font_family || defaultConfig.font_family,
+          set: (value) => {
+            config.font_family = value;
+            window.elementSdk.setConfig({ font_family: value });
+          }
+        },
+        fontSizeable: {
+          get: () => config.font_size || defaultConfig.font_size,
+          set: (value) => {
+            config.font_size = value;
+            window.elementSdk.setConfig({ font_size: value });
+          }
+        }
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ["page_title", config.page_title || defaultConfig.page_title],
+        ["page_subtitle", config.page_subtitle || defaultConfig.page_subtitle],
+        ["card1_title", config.card1_title || defaultConfig.card1_title],
+        ["card1_description", config.card1_description || defaultConfig.card1_description],
+        ["card2_title", config.card2_title || defaultConfig.card2_title],
+        ["card2_description", config.card2_description || defaultConfig.card2_description],
+        ["card3_title", config.card3_title || defaultConfig.card3_title],
+        ["card3_description", config.card3_description || defaultConfig.card3_description],
+        ["card4_title", config.card4_title || defaultConfig.card4_title],
+        ["card4_description", config.card4_description || defaultConfig.card4_description],
+        ["card5_title", config.card5_title || defaultConfig.card5_title],
+        ["card5_description", config.card5_description || defaultConfig.card5_description],
+        ["card6_title", config.card6_title || defaultConfig.card6_title],
+        ["card6_description", config.card6_description || defaultConfig.card6_description],
+        ["card7_title", config.card7_title || defaultConfig.card7_title],
+        ["card7_description", config.card7_description || defaultConfig.card7_description],
+        ["card8_title", config.card8_title || defaultConfig.card8_title],
+        ["card8_description", config.card8_description || defaultConfig.card8_description],
+        ["card9_title", config.card9_title || defaultConfig.card9_title],
+        ["card9_description", config.card9_description || defaultConfig.card9_description],
+        ["card10_title", config.card10_title || defaultConfig.card10_title],
+        ["card10_description", config.card10_description || defaultConfig.card10_description],
+        ["card11_title", config.card11_title || defaultConfig.card11_title],
+        ["card11_description", config.card11_description || defaultConfig.card11_description],
+        ["card12_title", config.card12_title || defaultConfig.card12_title],
+        ["card12_description", config.card12_description || defaultConfig.card12_description],
+        ["button_text", config.button_text || defaultConfig.button_text]
+      ]);
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+
+    document.querySelectorAll('.card-button').forEach(button => {
+      button.addEventListener('click', (e) => {
+        const url = e.target.getAttribute('data-url');
+        if (url) {
+          window.open(url, '_blank', 'noopener,noreferrer');
+        }
+      });
+    });
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99ab12bc302631be',t:'MTc2MjUwMDA4MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

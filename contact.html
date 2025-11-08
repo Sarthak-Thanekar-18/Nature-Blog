@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Professional Contact Page</title>
+  <script src="/_sdk/data_sdk.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      height: 100%;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      height: 100%;
+      overflow-x: hidden;
+      background: #f8f9fa;
+    }
+
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      min-height: 100%;
+      padding: 60px 20px;
+    }
+
+    .content-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 60px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .title {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 700;
+      margin: 0 0 16px 0;
+      letter-spacing: -0.02em;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .subtitle {
+      font-size: clamp(1.125rem, 2.5vw, 1.25rem);
+      margin: 0;
+      opacity: 0.8;
+      font-weight: 400;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .main-content {
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .form-container {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(20px);
+      border-radius: 16px;
+      padding: 48px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .form-group {
+      margin-bottom: 28px;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      color: #374151;
+      letter-spacing: 0.025em;
+    }
+
+    .form-input,
+    .form-textarea {
+      width: 100%;
+      padding: 16px 20px;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      font-size: 16px;
+      font-family: inherit;
+      transition: all 0.2s ease;
+      background: #ffffff;
+      color: #111827;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus {
+      outline: none;
+      border-color: #10b981;
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+      transform: translateY(-1px);
+    }
+
+    .form-input:hover,
+    .form-textarea:hover {
+      border-color: #d1d5db;
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 140px;
+      line-height: 1.6;
+    }
+
+    .submit-button {
+      width: 100%;
+      padding: 18px 32px;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: white;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+      letter-spacing: 0.025em;
+    }
+
+    .submit-button:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+      background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    }
+
+    .submit-button:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    .submit-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .info-card {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(20px);
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.2s ease;
+    }
+
+    .info-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12), 0 3px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .contact-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .icon-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+    }
+
+    .info-content {
+      flex: 1;
+      padding-top: 2px;
+    }
+
+    .info-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0 0 6px 0;
+      color: #374151;
+      letter-spacing: 0.025em;
+    }
+
+    .info-text {
+      font-size: 15px;
+      margin: 0;
+      color: #6b7280;
+      line-height: 1.5;
+    }
+
+
+
+    .success-message {
+      padding: 20px 24px;
+      border-radius: 12px;
+      text-align: center;
+      font-weight: 500;
+      margin-bottom: 32px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      animation: slideDown 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .success-message.success {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: white;
+    }
+
+    .success-message.error {
+      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+      color: white;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .main-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .container {
+        padding: 40px 20px;
+      }
+
+      .content-wrapper {
+        gap: 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 30px 16px;
+      }
+
+      .form-container {
+        padding: 32px 24px;
+      }
+
+      .info-card {
+        padding: 24px;
+      }
+
+      .header {
+        margin-bottom: 32px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .form-container {
+        padding: 24px 20px;
+      }
+
+      .info-card {
+        padding: 20px;
+      }
+
+      .form-input,
+      .form-textarea {
+        padding: 14px 16px;
+      }
+
+      .submit-button {
+        padding: 16px 24px;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <svg class="background" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1200 800" preserveaspectratio="xMidYMid slice"><defs>
+    <lineargradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+     <stop offset="0%" style="stop-color:#E8F5E9;stop-opacity:1" />
+     <stop offset="100%" style="stop-color:#C8E6C9;stop-opacity:1" />
+    </lineargradient>
+   </defs> <!-- Sky --> <rect width="1200" height="800" fill="url(#skyGradient)" /> <!-- Distant hills --> <ellipse cx="200" cy="500" rx="300" ry="80" fill="#A5D6A7" opacity="0.6" /> <ellipse cx="700" cy="520" rx="400" ry="100" fill="#81C784" opacity="0.5" /> <ellipse cx="1100" cy="510" rx="350" ry="90" fill="#A5D6A7" opacity="0.6" /> <!-- Meadow --> <ellipse cx="600" cy="750" rx="800" ry="200" fill="#66BB6A" opacity="0.7" /> <ellipse cx="300" cy="780" rx="500" ry="150" fill="#4CAF50" opacity="0.6" /> <ellipse cx="900" cy="770" rx="600" ry="180" fill="#66BB6A" opacity="0.7" /> <!-- River --> <path d="M 0 600 Q 300 580 600 600 T 1200 580 L 1200 650 Q 900 670 600 650 T 0 670 Z" fill="#81D4FA" opacity="0.4" /> <path d="M 0 620 Q 300 600 600 620 T 1200 600 L 1200 640 Q 900 660 600 640 T 0 660 Z" fill="#4FC3F7" opacity="0.3" /> <!-- Grass details --> <circle cx="150" cy="650" r="3" fill="#4CAF50" opacity="0.8" /> <circle cx="180" cy="670" r="2" fill="#66BB6A" opacity="0.8" /> <circle cx="450" cy="680" r="3" fill="#4CAF50" opacity="0.8" /> <circle cx="750" cy="660" r="2" fill="#66BB6A" opacity="0.8" /> <circle cx="950" cy="690" r="3" fill="#4CAF50" opacity="0.8" /> <circle cx="1050" cy="670" r="2" fill="#66BB6A" opacity="0.8" />
+  </svg>
+  <div class="container">
+   <div class="content-wrapper">
+    <header class="header">
+     <h1 class="title" id="pageTitle">Contact Us</h1>
+     <p class="subtitle" id="pageSubtitle">Get in touch with our team</p>
+    </header>
+  <div id="successMessage" class="success-message" role="status" aria-live="polite" style="display: none;"></div>
+    <div class="main-content">
+     <div class="form-container">
+  <form id="contactForm" action="https://formspree.io/f/xpwkaqoz" method="post">
+   <div class="form-group"><label for="name" class="form-label" id="nameLabel">Full Name</label> <input type="text" id="name" name="name" class="form-input" required>
+       </div>
+   <div class="form-group"><label for="email" class="form-label" id="emailLabel">Email Address</label> <input type="email" id="email" name="email" class="form-input" required>
+       </div>
+   <div class="form-group"><label for="subject" class="form-label" id="subjectLabel">Subject</label> <input type="text" id="subject" name="subject" class="form-input" required>
+       </div>
+   <div class="form-group"><label for="message" class="form-label" id="messageLabel">Message</label> <textarea id="message" name="message" class="form-textarea" required></textarea>
+     </div>
+  <!-- Formspree helpers: reply-to and subject -->
+  <input type="hidden" name="_replyto" id="_replyto" value="">
+  <input type="hidden" name="_subject" id="_subject_field" value="">
+   <button type="submit" class="submit-button" id="submitButton">Send Message</button>
+      </form>
+     </div>
+     <div class="contact-info">
+      <div class="info-card">
+       <div class="icon-circle" id="emailIconCircle">
+        <svg width="28" height="28" viewbox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /> <polyline points="22,6 12,13 2,6" />
+        </svg>
+       </div>
+       <div class="info-content">
+        <h3 class="info-title" id="emailTitle">Email</h3>
+        <p class="info-text" id="emailText">hello@example.com</p>
+       </div>
+      </div>
+      <div class="info-card">
+       <div class="icon-circle" id="socialIconCircle">
+        <svg width="28" height="28" viewbox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="10" /> <path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32" />
+        </svg>
+       </div>
+       <div class="info-content">
+        <h3 class="info-title" id="socialHeading">Follow Us</h3>
+        <div class="social-links"><a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-link" id="twitterLink">
+          <svg width="20" height="20" viewbox="0 0 24 24" fill="white"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
+          </svg></a> <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-link" id="facebookLink">
+          <svg width="20" height="20" viewbox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+          </svg></a> <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-link" id="instagramLink">
+          <svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" /> <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" /> <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+          </svg></a>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script>
+    const defaultConfig = {
+      background_color: '#E8F5E9',
+      surface_color: '#FFFFFF',
+      text_color: '#2E7D32',
+      primary_action_color: '#4CAF50',
+      secondary_action_color: '#66BB6A',
+      font_family: 'Segoe UI',
+      font_size: 16,
+      page_title: 'Get in Touch',
+      page_subtitle: "We'd love to hear from you",
+      name_label: 'Your Name',
+      email_label: 'Your Email',
+      message_label: 'Your Message',
+      submit_button: 'Send Message',
+      email_text: 'hello@example.com',
+      social_heading: 'Follow Us'
+    };
+
+    let currentRecordCount = 0;
+
+    const dataHandler = {
+      onDataChanged(data) {
+        currentRecordCount = data.length;
+      }
+    };
+
+    async function initializeApp() {
+      if (window.dataSdk) {
+        const initResult = await window.dataSdk.init(dataHandler);
+        if (!initResult.isOk) {
+          console.error('Failed to initialize data SDK');
+        }
+      }
+
+      if (window.elementSdk) {
+        window.elementSdk.init({
+          defaultConfig,
+          onConfigChange: async (config) => {
+            const customFont = config.font_family || defaultConfig.font_family;
+            const baseFontStack = 'Segoe UI, Tahoma, Geneva, Verdana, sans-serif';
+            const baseSize = config.font_size || defaultConfig.font_size;
+            const backgroundColor = config.background_color || defaultConfig.background_color;
+            const surfaceColor = config.surface_color || defaultConfig.surface_color;
+            const textColor = config.text_color || defaultConfig.text_color;
+            const primaryColor = config.primary_action_color || defaultConfig.primary_action_color;
+            const secondaryColor = config.secondary_action_color || defaultConfig.secondary_action_color;
+
+            document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
+            document.body.style.color = textColor;
+
+            const skyGradient = document.querySelector('#skyGradient stop:first-child');
+            if (skyGradient) skyGradient.style.stopColor = backgroundColor;
+
+            document.getElementById('pageTitle').textContent = config.page_title || defaultConfig.page_title;
+            document.getElementById('pageTitle').style.fontSize = `${baseSize * 3}px`;
+            document.getElementById('pageTitle').style.color = textColor;
+
+            document.getElementById('pageSubtitle').textContent = config.page_subtitle || defaultConfig.page_subtitle;
+            document.getElementById('pageSubtitle').style.fontSize = `${baseSize * 1.25}px`;
+            document.getElementById('pageSubtitle').style.color = textColor;
+
+            const formContainer = document.querySelector('.form-container');
+            formContainer.style.background = `${surfaceColor}F2`;
+
+            document.getElementById('nameLabel').textContent = config.name_label || defaultConfig.name_label;
+            document.getElementById('nameLabel').style.fontSize = `${baseSize * 0.875}px`;
+            document.getElementById('nameLabel').style.color = textColor;
+
+            document.getElementById('emailLabel').textContent = config.email_label || defaultConfig.email_label;
+            document.getElementById('emailLabel').style.fontSize = `${baseSize * 0.875}px`;
+            document.getElementById('emailLabel').style.color = textColor;
+
+            document.getElementById('messageLabel').textContent = config.message_label || defaultConfig.message_label;
+            document.getElementById('messageLabel').style.fontSize = `${baseSize * 0.875}px`;
+            document.getElementById('messageLabel').style.color = textColor;
+
+            const inputs = document.querySelectorAll('.form-input, .form-textarea');
+            inputs.forEach(input => {
+              input.style.fontSize = `${baseSize}px`;
+              input.style.borderColor = `${primaryColor}4D`;
+              input.style.background = surfaceColor;
+              input.style.color = textColor;
+            });
+
+            const submitButton = document.getElementById('submitButton');
+            submitButton.textContent = config.submit_button || defaultConfig.submit_button;
+            submitButton.style.fontSize = `${baseSize}px`;
+            submitButton.style.background = primaryColor;
+            submitButton.style.color = surfaceColor;
+
+            const infoCards = document.querySelectorAll('.info-card');
+            infoCards.forEach(card => {
+              card.style.background = `${surfaceColor}F2`;
+            });
+
+            document.getElementById('emailIconCircle').style.background = primaryColor;
+            document.getElementById('socialIconCircle').style.background = primaryColor;
+
+            document.getElementById('emailTitle').style.fontSize = `${baseSize * 1.125}px`;
+            document.getElementById('emailTitle').style.color = textColor;
+            document.getElementById('emailText').textContent = config.email_text || defaultConfig.email_text;
+            document.getElementById('emailText').style.fontSize = `${baseSize}px`;
+            document.getElementById('emailText').style.color = textColor;
+
+            document.getElementById('socialHeading').textContent = config.social_heading || defaultConfig.social_heading;
+            document.getElementById('socialHeading').style.fontSize = `${baseSize * 1.125}px`;
+            document.getElementById('socialHeading').style.color = textColor;
+
+            const socialLinks = document.querySelectorAll('.social-link');
+            socialLinks.forEach(link => {
+              link.style.background = secondaryColor;
+            });
+          },
+          mapToCapabilities: (config) => ({
+            recolorables: [
+              {
+                get: () => config.background_color || defaultConfig.background_color,
+                set: (value) => {
+                  if (window.elementSdk) {
+                    window.elementSdk.config.background_color = value;
+                    window.elementSdk.setConfig({ background_color: value });
+                  }
+                }
+              },
+              {
+                get: () => config.surface_color || defaultConfig.surface_color,
+                set: (value) => {
+                  if (window.elementSdk) {
+                    window.elementSdk.config.surface_color = value;
+                    window.elementSdk.setConfig({ surface_color: value });
+                  }
+                }
+              },
+              {
+                get: () => config.text_color || defaultConfig.text_color,
+                set: (value) => {
+                  if (window.elementSdk) {
+                    window.elementSdk.config.text_color = value;
+                    window.elementSdk.setConfig({ text_color: value });
+                  }
+                }
+              },
+              {
+                get: () => config.primary_action_color || defaultConfig.primary_action_color,
+                set: (value) => {
+                  if (window.elementSdk) {
+                    window.elementSdk.config.primary_action_color = value;
+                    window.elementSdk.setConfig({ primary_action_color: value });
+                  }
+                }
+              },
+              {
+                get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+                set: (value) => {
+                  if (window.elementSdk) {
+                    window.elementSdk.config.secondary_action_color = value;
+                    window.elementSdk.setConfig({ secondary_action_color: value });
+                  }
+                }
+              }
+            ],
+            borderables: [],
+            fontEditable: {
+              get: () => config.font_family || defaultConfig.font_family,
+              set: (value) => {
+                if (window.elementSdk) {
+                  window.elementSdk.config.font_family = value;
+                  window.elementSdk.setConfig({ font_family: value });
+                }
+              }
+            },
+            fontSizeable: {
+              get: () => config.font_size || defaultConfig.font_size,
+              set: (value) => {
+                if (window.elementSdk) {
+                  window.elementSdk.config.font_size = value;
+                  window.elementSdk.setConfig({ font_size: value });
+                }
+              }
+            }
+          }),
+          mapToEditPanelValues: (config) => new Map([
+            ['page_title', config.page_title || defaultConfig.page_title],
+            ['page_subtitle', config.page_subtitle || defaultConfig.page_subtitle],
+            ['name_label', config.name_label || defaultConfig.name_label],
+            ['email_label', config.email_label || defaultConfig.email_label],
+            ['message_label', config.message_label || defaultConfig.message_label],
+            ['submit_button', config.submit_button || defaultConfig.submit_button],
+            ['email_text', config.email_text || defaultConfig.email_text],
+            ['social_heading', config.social_heading || defaultConfig.social_heading]
+          ])
+        });
+      }
+    }
+
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+      const form = e.target;
+
+      // Validate; if invalid, prevent submission and show browser UI
+      if (!form.checkValidity()) {
+        e.preventDefault();
+        form.reportValidity();
+        return;
+      }
+
+      // Set helper hidden fields so Formspree receives reply-to and subject
+      const replyInput = document.getElementById('_replyto');
+      if (replyInput) replyInput.value = document.getElementById('email').value || '';
+      const subjInput = document.getElementById('_subject_field');
+      if (subjInput) subjInput.value = document.getElementById('subject').value || '';
+
+      const submitButton = document.getElementById('submitButton');
+      submitButton.disabled = true;
+      const originalText = submitButton.textContent;
+      submitButton.textContent = 'Sending...';
+
+      // Fire-and-forget internal save (do not block native submission)
+      try {
+        const payload = {
+          name: document.getElementById('name').value,
+          email: document.getElementById('email').value,
+          subject: document.getElementById('subject').value,
+          message: document.getElementById('message').value,
+          submitted_at: new Date().toISOString()
+        };
+        if (window.dataSdk && window.dataSdk.create) {
+          // do not await; allow navigation to Formspree to proceed
+          window.dataSdk.create(payload).catch(err => console.warn('dataSdk.create failed:', err));
+        }
+      } catch (err) {
+        console.warn('Internal save failed:', err);
+      }
+
+      // Do not call e.preventDefault() — allow the browser to POST the form to Formspree
+      // Re-enable the button after a short timeout in case the page doesn't navigate
+      setTimeout(() => {
+        submitButton.disabled = false;
+        submitButton.textContent = originalText;
+      }, 5000);
+    });
+
+    function showSuccessMessage(message, isSuccess = true) {
+      const messageDiv = document.getElementById('successMessage');
+      messageDiv.textContent = message;
+      messageDiv.style.display = 'block';
+      messageDiv.style.background = isSuccess ? 'rgba(76, 175, 80, 0.95)' : 'rgba(244, 67, 54, 0.95)';
+
+      setTimeout(() => {
+        messageDiv.style.display = 'none';
+      }, 5000);
+    }
+
+    initializeApp();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99a6349a64fd89f0',t:'MTc2MjQ0OTAzOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

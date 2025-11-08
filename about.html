@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About the Blogger - Nature Blog</title>
+  <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Garamond', serif;
+            background: #f5f5f0;
+            min-height: 100%;
+            line-height: 1.8;
+            color: #333;
+            box-sizing: border-box;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        .header-banner {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-banner::before {
+            content: '🍃';
+            position: absolute;
+            font-size: 120px;
+            opacity: 0.1;
+            top: -20px;
+            left: 10%;
+            transform: rotate(-15deg);
+        }
+
+        .header-banner::after {
+            content: '🍃';
+            position: absolute;
+            font-size: 120px;
+            opacity: 0.1;
+            bottom: -20px;
+            right: 10%;
+            transform: rotate(15deg);
+        }
+
+        .header-banner h1 {
+            font-size: 48px;
+            color: #ffffff;
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-banner .subtitle {
+            font-size: 18px;
+            color: #ecf0f1;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: -40px auto 0;
+            padding: 0 20px 60px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .main-content {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .profile-header {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 0;
+            min-height: 450px;
+        }
+
+        .profile-image-section {
+            background: linear-gradient(135deg, #e8a87c 0%, #c38d9e 100%);
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-image {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 8px solid #ffffff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 25px;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-image:hover {
+            transform: scale(1.03);
+        }
+
+        .profile-name {
+            font-size: 32px;
+            color: #ffffff;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .profile-role {
+            font-size: 16px;
+            color: #ffffff;
+            text-align: center;
+            opacity: 0.95;
+            font-style: italic;
+        }
+
+        .profile-info-section {
+            padding: 50px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: #fafafa;
+        }
+
+        .section-title {
+            font-size: 28px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: #e8a87c;
+        }
+
+        .bio-text {
+            font-size: 17px;
+            color: #555;
+            line-height: 1.9;
+            margin-bottom: 25px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            padding: 50px 60px;
+            background: #ffffff;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #e8a87c;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 36px;
+            color: #2c3e50;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .quote-section {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            padding: 60px;
+            text-align: center;
+            position: relative;
+        }
+
+        .quote-section::before {
+            content: '"';
+            font-size: 120px;
+            color: rgba(255, 255, 255, 0.1);
+            position: absolute;
+            top: 20px;
+            left: 60px;
+            font-family: Georgia, serif;
+        }
+
+        .quote-text {
+            font-size: 24px;
+            color: #ffffff;
+            font-style: italic;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .purpose-section {
+            padding: 60px;
+            background: #ffffff;
+        }
+
+        .purpose-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .purpose-text {
+            font-size: 17px;
+            color: #555;
+            line-height: 1.9;
+            margin-bottom: 30px;
+        }
+
+        .journey-section {
+            padding: 60px;
+            background: #fafafa;
+        }
+
+        .journey-title {
+            font-size: 32px;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 50px;
+            font-weight: 600;
+        }
+
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e8a87c;
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            width: 45%;
+            padding: 25px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+            position: relative;
+        }
+
+        .timeline-year {
+            font-size: 20px;
+            color: #e8a87c;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .timeline-text {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            background: #e8a87c;
+            border: 4px solid #fafafa;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: #ecf0f1;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 0;
+        }
+
+        .footer p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 968px) {
+            .profile-header {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-image-section {
+                padding: 40px 30px;
+            }
+
+            .profile-info-section {
+                padding: 40px 30px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                padding: 40px 30px;
+                gap: 20px;
+            }
+
+            .quote-section {
+                padding: 40px 30px;
+            }
+
+            .quote-text {
+                font-size: 20px;
+            }
+
+            .purpose-section,
+            .journey-section {
+                padding: 40px 30px;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                flex-direction: row !important;
+            }
+
+            .timeline-content {
+                width: calc(100% - 60px);
+                margin-left: 60px;
+            }
+
+            .timeline-dot {
+                left: 20px;
+            }
+
+            .header-banner h1 {
+                font-size: 36px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header-banner {
+                padding: 40px 20px;
+            }
+
+            .header-banner h1 {
+                font-size: 28px;
+            }
+
+            .profile-image {
+                width: 200px;
+                height: 200px;
+            }
+
+            .profile-name {
+                font-size: 26px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .journey-title {
+                font-size: 26px;
+            }
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="header-banner">
+   <h1>About the Blogger</h1>
+   <p class="subtitle">Connecting with Nature, Inspiring Conservation</p>
+  </div>
+  <div class="container">
+   <div class="main-content">
+    <div class="profile-header">
+     <div class="profile-image-section"><img src="https://img.freepik.com/premium-vector/st-letter-logo-design_473099-61.jpg" alt="Sarthak Thanekar - Nature Blogger" class="profile-image">
+      <h2 class="profile-name">Sarthak Thanekar</h2>
+      <p class="profile-role">Nature Enthusiast &amp; Wildlife Photographer</p>
+     </div>
+     <div class="profile-info-section">
+      <h3 class="section-title">Hello, I'm Sarthak</h3>
+      <p class="bio-text">Welcome to my corner of the internet! I'm a passionate nature lover and wildlife photographer based in the Pacific Northwest. My journey into nature photography began over a decade ago with a simple hiking trip that forever changed my perspective on the natural world.</p>
+      <p class="bio-text">Through my lens, I capture the raw beauty of wildlife and landscapes, sharing stories that inspire others to appreciate and protect our planet's incredible biodiversity. Every photograph tells a story of resilience, beauty, and the delicate balance of our ecosystems.</p>
+     </div>
+    </div>
+    <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="header-banner">
+   <h1>About the Blogger</h1>
+   <p class="subtitle">Connecting with Nature, Inspiring Conservation</p>
+  </div>
+  <div class="container">
+   <div class="main-content">
+    <div class="profile-header">
+     <div class="profile-image-section"><img src="https://t3.ftcdn.net/jpg/03/13/48/08/360_F_313480873_pMppMsQwF7I6hIqeV3QsbAbLYPcPfuCK.jpg" alt="Darshan Vadawane - Nature Blogger" class="profile-image">
+      <h2 class="profile-name">Darshan Vadawane</h2>
+      <p class="profile-role">Nature Enthusiast &amp; Wildlife Photographer</p>
+     </div>
+     <div class="profile-info-section">
+      <h3 class="section-title">Hello, I'm Darshan</h3>
+      <p class="bio-text">Welcome to my corner of the internet! I'm a passionate nature lover and wildlife photographer based in the Pacific Northwest. My journey into nature photography began over a decade ago with a simple hiking trip that forever changed my perspective on the natural world.</p>
+      <p class="bio-text">Through my lens, I capture the raw beauty of wildlife and landscapes, sharing stories that inspire others to appreciate and protect our planet's incredible biodiversity. Every photograph tells a story of resilience, beauty, and the delicate balance of our ecosystems.</p>
+     </div>
+    </div>
+    <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="header-banner">
+   <h1>About the Blogger</h1>
+   <p class="subtitle">Connecting with Nature, Inspiring Conservation</p>
+  </div>
+  <div class="container">
+   <div class="main-content">
+    <div class="profile-header">
+     <div class="profile-image-section"><img src="https://i.pinimg.com/736x/ce/f2/b0/cef2b0104308135085a326f56a09f271.jpg" alt="Prathmesh Manwar - Nature Blogger" class="profile-image">
+      <h2 class="profile-name">Prathmesh Manwar</h2>
+      <p class="profile-role">Nature Enthusiast &amp; Wildlife Photographer</p>
+     </div>
+     <div class="profile-info-section">
+      <h3 class="section-title">Hello, I'm Prathmesh</h3>
+      <p class="bio-text">Welcome to my corner of the internet! I'm a passionate nature lover and wildlife photographer based in the Pacific Northwest. My journey into nature photography began over a decade ago with a simple hiking trip that forever changed my perspective on the natural world.</p>
+      <p class="bio-text">Through my lens, I capture the raw beauty of wildlife and landscapes, sharing stories that inspire others to appreciate and protect our planet's incredible biodiversity. Every photograph tells a story of resilience, beauty, and the delicate balance of our ecosystems.</p>
+     </div>
+    </div>
+    <div class="stats-grid">
+     <div class="stat-item">
+      <div class="stat-number">
+       5+
+      </div>
+      <div class="stat-label">
+       Years Experience
+      </div>
+     </div>
+     <div class="stat-item">
+      <div class="stat-number">
+       500+
+      </div>
+      <div class="stat-label">
+       Articles Published
+      </div>
+     </div>
+     <div class="stat-item">
+      <div class="stat-number">
+       3
+      </div>
+      <div class="stat-label">
+       Community Members
+      </div>
+     </div>
+    </div>
+    <div class="quote-section">
+     <p class="quote-text">In every walk with nature, one receives far more than he seeks. Our mission is to share these gifts with the world and inspire a deeper connection with our natural environment.</p>
+    </div>
+    <div class="purpose-section">
+     <div class="purpose-content">
+      <h3 class="section-title">About This Blog</h3>
+      <p class="purpose-text">This blog serves as a platform to share our adventures, photography techniques, and the incredible stories of wildlife we encounter. Whether you're an experienced outdoor enthusiast or just beginning to explore nature, you'll find inspiration, practical guides, and stunning imagery that celebrates our planet's beauty.</p>
+      <p class="purpose-text">My goal is to foster conservation awareness and encourage others to develop a deeper appreciation for the ecosystems that sustain us. Through education, storytelling, and visual art, I hope to inspire positive change and a commitment to protecting our natural world for future generations.</p>
+     </div>
+    </div>
+    <div class="journey-section">
+     <h3 class="journey-title">Our Journey</h3>
+     <div class="timeline">
+      <div class="timeline-item">
+       <div class="timeline-content">
+        <div class="timeline-year">
+         2022
+        </div>
+        <p class="timeline-text">Discovered our passion for nature photography during a backpacking trip through Olympic National Park.</p>
+       </div>
+       <div class="timeline-dot"></div>
+      </div>
+      <div class="timeline-item">
+       <div class="timeline-content">
+        <div class="timeline-year">
+         2023
+        </div>
+        <p class="timeline-text">Launched this blog to share our experiences and connect with fellow nature enthusiasts worldwide.</p>
+       </div>
+       <div class="timeline-dot"></div>
+      </div>
+      <div class="timeline-item">
+       <div class="timeline-content">
+        <div class="timeline-year">
+         2024
+        </div>
+        <p class="timeline-text">Published our first photography book featuring wildlife from the Pacific Northwest region.</p>
+       </div>
+       <div class="timeline-dot"></div>
+      </div>
+      <div class="timeline-item">
+       <div class="timeline-content">
+        <div class="timeline-year">
+         2025
+        </div>
+        <p class="timeline-text">Continuing to explore, document, and inspire conservation efforts through storytelling and photography.</p>
+       </div>
+       <div class="timeline-dot"></div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="footer">
+   <p>© 2025 Nature Blog. All rights reserved. | Embracing nature’s beauty.</p>
+  </div>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99ad600654c031be',t:'MTc2MjUyNDIxNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
