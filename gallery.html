@@ -1,0 +1,797 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nature Photography Gallery - Premium 4K Collection</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            box-sizing: border-box;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: #1a1a1a;
+            color: #ffffff;
+            min-height: 100%;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        /* Animated Background Pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(135deg, #0a3d2e 0%, #1a5c47 25%, #2d7a5f 50%, #1a5c47 75%, #0a3d2e 100%);
+            opacity: 0.95;
+            z-index: -2;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(255, 255, 255, 0.02) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 100%);
+            backdrop-filter: blur(10px);
+            color: #ffffff;
+            padding: 1.5rem 2rem 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .site-title {
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 3px;
+            margin-bottom: 0.3rem;
+            text-transform: uppercase;
+            opacity: 0.9;
+            color: #b8d4c8;
+        }
+
+        .gallery-hero {
+            text-align: center;
+            margin-top: 0.8rem;
+        }
+
+        .gallery-title {
+            font-size: 2.2rem;
+            font-weight: 300;
+            margin-bottom: 0.4rem;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #ffffff 0%, #b8d4c8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gallery-subtitle {
+            font-size: 1rem;
+            font-weight: 300;
+            opacity: 0.85;
+            font-style: italic;
+            color: #d4e8dd;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 1.5rem 2rem;
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Photo Card */
+        .photo-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .photo-container {
+            position: relative;
+            width: 100%;
+            padding-top: 75%;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1a5c47 0%, #2d7a5f 100%);
+        }
+
+        .photo-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .photo-emoji {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            background: linear-gradient(135deg, rgba(26, 92, 71, 0.4) 0%, rgba(45, 122, 95, 0.4) 100%);
+        }
+
+        .photo-card:hover .photo-image,
+        .photo-card:hover .photo-emoji {
+            transform: scale(1.1);
+        }
+
+        .quality-badge {
+            position: absolute;
+            top: 0.7rem;
+            right: 0.7rem;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            color: #4ade80;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(74, 222, 128, 0.3);
+            z-index: 10;
+        }
+
+        .photo-info {
+            padding: 1.2rem;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.6) 100%);
+        }
+
+        .photo-number {
+            font-size: 0.75rem;
+            color: #4ade80;
+            margin-bottom: 0.3rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .photo-title {
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin-bottom: 0.4rem;
+            color: #ffffff;
+            letter-spacing: 0.3px;
+        }
+
+        .photo-description {
+            font-size: 0.85rem;
+            color: #b8d4c8;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+            opacity: 0.9;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+        }
+
+        .view-button {
+            flex: 1;
+            background: linear-gradient(135deg, #2d7a5f 0%, #1a5c47 100%);
+            color: #ffffff;
+            padding: 0.7rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .view-button:hover {
+            background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(74, 222, 128, 0.4);
+            border-color: #4ade80;
+        }
+
+        .download-icon {
+            background: rgba(74, 222, 128, 0.2);
+            color: #4ade80;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            border: 1px solid rgba(74, 222, 128, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .download-icon:hover {
+            background: #4ade80;
+            color: #0a3d2e;
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%);
+            backdrop-filter: blur(10px);
+            color: #ffffff;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            font-size: 0.85rem;
+            opacity: 0.8;
+            color: #b8d4c8;
+        }
+
+        /* Modal for 4K View */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: rgba(26, 92, 71, 0.3);
+            border: 2px solid rgba(74, 222, 128, 0.3);
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .modal-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #4ade80;
+        }
+
+        .modal-description {
+            font-size: 1.1rem;
+            color: #b8d4c8;
+            margin-bottom: 2rem;
+        }
+
+        .modal-specs {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-specs p {
+            margin: 0.5rem 0;
+            color: #d4e8dd;
+        }
+
+        .modal-specs strong {
+            color: #4ade80;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .gallery-title {
+                font-size: 1.8rem;
+            }
+
+            .gallery-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+
+            header {
+                padding: 1.2rem 1rem 1.5rem;
+            }
+
+            main {
+                padding: 0 1rem 1.5rem;
+                margin: 1.5rem auto;
+            }
+
+            .photo-emoji {
+                font-size: 2.5rem;
+            }
+
+            .photo-info {
+                padding: 1rem;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .gallery-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <header>
+   <div class="header-content">
+    <div class="site-title" id="siteTitle">
+     NATURE PHOTOGRAPHY STUDIO
+    </div>
+    <div class="gallery-hero">
+     <h1 class="gallery-title" id="galleryTitle">Premium 4K Nature Collection</h1>
+     <p class="gallery-subtitle" id="gallerySubtitle">Explore breathtaking landscapes captured in stunning detail</p>
+    </div>
+   </div>
+  </header>
+  <main>
+   <div class="gallery-grid" id="galleryGrid"><!-- Photos will be generated by JavaScript -->
+   </div>
+  </main>
+  <footer>
+   <div class="footer-content" id="footerText">
+    © 2024 Nature Photography Studio. All rights reserved.
+   </div>
+  </footer><!-- Modal for 4K Viewer -->
+  <div class="modal" id="photoModal">
+   <div class="modal-content"><button class="modal-close" onclick="closeModal()">×</button>
+    <div class="modal-icon" id="modalIcon">
+     📸
+    </div>
+    <h2 class="modal-title" id="modalTitle">Photo Title</h2>
+    <p class="modal-description" id="modalDescription">Photo description</p>
+    <div class="modal-specs">
+     <p><strong>Resolution:</strong> 3840 × 2160 pixels</p>
+     <p><strong>Format:</strong> Ultra HD 4K</p>
+     <p><strong>Quality:</strong> Professional Grade</p>
+     <p><strong>File Size:</strong> ~8-12 MB</p>
+    </div><button class="view-button" onclick="closeModal()">Close Viewer</button>
+   </div>
+  </div>
+  <script>
+        // Generate 10,000 photos programmatically with 50 diverse nature categories
+        function generatePhotoData() {
+            const categories = [
+                { icon: '🏔️', names: ['Alpine Summit', 'Mountain Peak', 'Snowy Ridge', 'Ice Peak', 'Summit View', 'Peak Collection', 'Glacier View', 'Rocky Cliff', 'Mountain Dawn', 'Himalayan Heights'], desc: 'Majestic mountain peaks reaching for the sky' },
+                { icon: '🌲', names: ['Misty Forest', 'Pine Forest', 'Redwood Grove', 'Cedar Forest', 'Birch Grove', 'Spruce Stand', 'Aspen Grove', 'Old Growth', 'Forest Path', 'Ancient Trees'], desc: 'Enchanted woodland paths through towering trees' },
+                { icon: '🌊', names: ['Ocean Sunrise', 'Coastal Waves', 'Wave Motion', 'Turquoise Bay', 'Ocean Depth', 'Surf Break', 'Tide Pool', 'Storm Waves', 'Blue Lagoon', 'Coral Reef'], desc: 'Powerful ocean waves crashing on pristine shores' },
+                { icon: '🌸', names: ['Cherry Blossom', 'Spring Blossoms', 'Cherry Garden', 'Rose Garden', 'Tulip Field', 'Magnolia Bloom', 'Flower Meadow', 'Blossom Valley', 'Petal Rain', 'Pink Paradise'], desc: 'Delicate blooms painting nature in soft pastels' },
+                { icon: '🌅', names: ['Golden Sunrise', 'Dawn Vista', 'Golden Hour', 'Sunrise Glow', 'Horizon Blaze', 'Dusk Colors', 'Morning Glory', 'Sunset Beach', 'Evening Light', 'Twilight Sky'], desc: 'Breathtaking sunrise illuminating the horizon' },
+                { icon: '🌺', names: ['Tropical Paradise', 'Hibiscus Garden', 'Flower Field', 'Orchid Valley', 'Garden Paradise', 'Exotic Blooms', 'Island Flowers', 'Jungle Blossoms', 'Paradise Garden', 'Floral Haven'], desc: 'Vibrant tropical flowers in full bloom' },
+                { icon: '🏖️', names: ['Sandy Beach', 'Beach Sunset', 'White Sand', 'Shell Beach', 'Golden Beach', 'Island Shore', 'Coastal Paradise', 'Beach Paradise', 'Shoreline', 'Ocean Beach'], desc: 'Pristine white sand beaches with crystal waters' },
+                { icon: '🌄', names: ['Desert Dunes', 'Dawn Vista', 'Hill Country', 'Valley Dawn', 'Alpine Meadow', 'Mountain Vista', 'Desert Sunset', 'Valley View', 'Highland Dawn', 'Rolling Hills'], desc: 'Sweeping landscapes under endless skies' },
+                { icon: '🦅', names: ['Eagle Canyon', 'Soaring Eagle', 'Alpine Eagle', 'Hawk Flight', 'Falcon Peak', 'Bird Flight', 'Sky Hunter', 'Raptor Soar', 'Eagle View', 'Wings Above'], desc: 'Majestic birds soaring through open skies' },
+                { icon: '❄️', names: ['Winter Wonderland', 'Ice Peak', 'Frozen Lake', 'Snow Forest', 'Icicle Cave', 'Winter Scene', 'Snowy Pines', 'Ice Crystal', 'Frost Valley', 'Frozen Falls'], desc: 'Serene winter landscapes blanketed in snow' },
+                { icon: '🌈', names: ['Rainbow Falls', 'Rainbow Valley', 'Prism Sky', 'Colorful Arc', 'Double Rainbow', 'Rainbow Meadow', 'Spectrum View', 'Rainbow Bridge', 'Arc of Light', 'Sky Colors'], desc: 'Spectacular rainbows arcing across the sky' },
+                { icon: '🦋', names: ['Butterfly Garden', 'Monarch Wings', 'Flutter Field', 'Wing Beauty', 'Butterfly Meadow', 'Colorful Wings', 'Garden Flutter', 'Wing Dance', 'Butterfly Valley', 'Winged Wonders'], desc: 'Colorful butterflies dancing through flowers' },
+                { icon: '🌴', names: ['Palm Paradise', 'Coconut Beach', 'Island Palms', 'Palm Grove', 'Tropical Palms', 'Swaying Palms', 'Paradise Palms', 'Beach Palms', 'Palm Sunset', 'Island Paradise'], desc: 'Swaying palms against tropical blue skies' },
+                { icon: '🏞️', names: ['River Valley', 'Canyon River', 'Gorge Vista', 'National Park', 'Valley Stream', 'Mountain River', 'River Canyon', 'Wild River', 'Stream Valley', 'River Gorge'], desc: 'Winding rivers through dramatic canyons' },
+                { icon: '🌙', names: ['Moonlit Valley', 'Night Sky', 'Lunar Landscape', 'Eclipse Night', 'Star Trail', 'Moon Glow', 'Midnight Scene', 'Lunar View', 'Night Vista', 'Moon Rising'], desc: 'Peaceful moonlit scenes under starry skies' },
+                { icon: '🍂', names: ['Autumn Forest', 'Fall Colors', 'Maple Leaves', 'Autumn Valley', 'Fall Foliage', 'Golden Autumn', 'Harvest Season', 'Autumn Path', 'Fall Glory', 'Leaf Carpet'], desc: 'Brilliant autumn colors blazing through forests' },
+                { icon: '⭐', names: ['Starry Night', 'Milky Way', 'Star Field', 'Galaxy View', 'Cosmic Sky', 'Star Cluster', 'Night Stars', 'Stellar View', 'Starscape', 'Celestial View'], desc: 'Millions of stars illuminating the night' },
+                { icon: '🌋', names: ['Volcanic Peak', 'Lava Flow', 'Volcanic Crater', 'Fire Mountain', 'Molten Rock', 'Volcanic Landscape', 'Lava Field', 'Volcano Vista', 'Magma Flow', 'Fire Earth'], desc: 'Raw volcanic power reshaping the earth' },
+                { icon: '🌿', names: ['Fern Grotto', 'Green Haven', 'Jungle Canopy', 'Fern Forest', 'Moss Garden', 'Verdant Valley', 'Green Paradise', 'Lush Grove', 'Emerald Forest', 'Green Sanctuary'], desc: 'Lush green ferns in peaceful grottos' },
+                { icon: '🌵', names: ['Desert Bloom', 'Cactus Field', 'Desert Garden', 'Saguaro Sunset', 'Desert Flora', 'Cactus Valley', 'Arid Beauty', 'Desert Oasis', 'Cactus Flowers', 'Desert Spring'], desc: 'Resilient desert plants in harsh beauty' },
+                { icon: '🌻', names: ['Sunflower Field', 'Golden Blooms', 'Sunflower Valley', 'Yellow Paradise', 'Sunflower Rows', 'Golden Field', 'Sun Blooms', 'Happy Flowers', 'Sunflower Sunset', 'Yellow Sea'], desc: 'Endless fields of golden sunflowers' },
+                { icon: '🦌', names: ['Deer Meadow', 'Forest Deer', 'Grazing Deer', 'Deer Family', 'Meadow Wildlife', 'Deer Valley', 'Buck Vista', 'Deer Path', 'Wildlife Scene', 'Deer Dawn'], desc: 'Graceful deer in natural meadows' },
+                { icon: '🌾', names: ['Wheat Fields', 'Golden Grain', 'Harvest Field', 'Wheat Waves', 'Grain Valley', 'Farmland', 'Wheat Sunset', 'Golden Harvest', 'Prairie Wheat', 'Grain Fields'], desc: 'Golden wheat fields swaying in the breeze' },
+                { icon: '🏕️', names: ['Mountain Camp', 'Lake Camp', 'River Camp', 'Forest Camp', 'Camp Under Stars', 'Wilderness Camp', 'Camping Vista', 'Outdoor Haven', 'Nature Camp', 'Adventure Camp'], desc: 'Perfect wilderness camping destinations' },
+                { icon: '🌳', names: ['Ancient Oak', 'Giant Tree', 'Old Oak', 'Tree of Life', 'Mighty Oak', 'Sacred Tree', 'Wisdom Tree', 'Grandfather Oak', 'Ancient Giant', 'Tree Monument'], desc: 'Ancient trees standing proud through centuries' },
+                { icon: '🐻', names: ['Bear Habitat', 'Grizzly Territory', 'Wildlife Forest', 'Bear Country', 'Mountain Bear', 'Wild Territory', 'Bear Valley', 'Forest Wildlife', 'Bear Sanctuary', 'Wild Bears'], desc: 'Natural habitat for majestic bears' },
+                { icon: '🏝️', names: ['Tropical Island', 'Paradise Isle', 'Island Dream', 'Remote Paradise', 'Island Escape', 'Coral Island', 'Hidden Island', 'Island Lagoon', 'Tropical Haven', 'Island Bliss'], desc: 'Remote tropical islands in azure seas' },
+                { icon: '💐', names: ['Wildflower Meadow', 'Spring Flowers', 'Flower Paradise', 'Colorful Meadow', 'Bloom Field', 'Flower Valley', 'Petal Carpet', 'Wildflower Vista', 'Flower Haven', 'Bloom Paradise'], desc: 'Vibrant wildflowers carpeting meadows' },
+                { icon: '🦜', names: ['Parrot Paradise', 'Tropical Birds', 'Colorful Parrots', 'Bird Sanctuary', 'Exotic Birds', 'Parrot Forest', 'Rainbow Birds', 'Jungle Birds', 'Bird Paradise', 'Feathered Friends'], desc: 'Colorful parrots in tropical paradise' },
+                { icon: '🌱', names: ['New Growth', 'Spring Seedling', 'Fresh Start', 'Green Sprout', 'Life Begins', 'Young Plant', 'Growth', 'Nature Birth', 'Seedling', 'New Life'], desc: 'New life sprouting from fertile earth' },
+                { icon: '🏔️', names: ['Everest View', 'K2 Peak', 'Alpine Heights', 'Mountain Range', 'Snow Peaks', 'High Altitude', 'Summit Challenge', 'Peak Majesty', 'Mountain Crown', 'Alpine Glory'], desc: 'World\'s highest peaks touching the clouds' },
+                { icon: '🌊', names: ['Tsunami Wave', 'Giant Surf', 'Mega Wave', 'Ocean Power', 'Wave Barrel', 'Perfect Wave', 'Blue Wave', 'Ocean Swell', 'Wave Crest', 'Surfer Dream'], desc: 'Massive ocean swells with incredible power' },
+                { icon: '🦎', names: ['Lizard Rock', 'Desert Reptile', 'Gecko Paradise', 'Chameleon Forest', 'Reptile Haven', 'Lizard Valley', 'Sun Basker', 'Rock Climber', 'Desert Life', 'Reptile World'], desc: 'Fascinating reptiles in natural habitats' },
+                { icon: '🐠', names: ['Coral Garden', 'Tropical Fish', 'Reef Life', 'Ocean Colors', 'Fish School', 'Marine Life', 'Underwater Paradise', 'Reef Fish', 'Ocean Jewels', 'Aquatic Beauty'], desc: 'Colorful fish dancing through coral reefs' },
+                { icon: '🌕', names: ['Full Moon', 'Harvest Moon', 'Super Moon', 'Blood Moon', 'Luna Rising', 'Moon Glory', 'Lunar Beauty', 'Moon Night', 'Silver Moon', 'Moon Magic'], desc: 'Full moon illuminating the night sky' },
+                { icon: '🦊', names: ['Fox Den', 'Red Fox', 'Forest Fox', 'Arctic Fox', 'Fox Family', 'Clever Fox', 'Fox Valley', 'Wild Fox', 'Fox Portrait', 'Sly Fox'], desc: 'Clever foxes in their natural territory' },
+                { icon: '🍃', names: ['Leaf Detail', 'Dew Drops', 'Morning Dew', 'Leaf Veins', 'Fresh Leaf', 'Green Leaf', 'Leaf Pattern', 'Nature Close-up', 'Leaf Art', 'Botanical Beauty'], desc: 'Intricate leaf details with morning dew' },
+                { icon: '🦆', names: ['Duck Pond', 'Mallard Lake', 'Waterfowl', 'Duck Family', 'Pond Life', 'Swimming Ducks', 'Lake Birds', 'Duck Paradise', 'Wetland Wildlife', 'Duck Swimming'], desc: 'Peaceful ducks gliding across calm waters' },
+                { icon: '🌻', names: ['Daisy Field', 'White Petals', 'Daisy Meadow', 'Simple Beauty', 'Pure Flowers', 'Daisy Garden', 'White Field', 'Innocent Blooms', 'Daisy Valley', 'Petal White'], desc: 'Simple beauty of white daisy fields' },
+                { icon: '🐺', names: ['Wolf Pack', 'Lone Wolf', 'Alpha Wolf', 'Wolf Territory', 'Wolf Valley', 'Howling Wolf', 'Wolf Family', 'Wild Wolves', 'Wolf Moon', 'Pack Leader'], desc: 'Majestic wolves in wild territories' },
+                { icon: '🌌', names: ['Nebula View', 'Galaxy Cluster', 'Space Beauty', 'Cosmic Wonder', 'Star Birth', 'Universe View', 'Deep Space', 'Celestial Beauty', 'Cosmic Art', 'Space Colors'], desc: 'Breathtaking views of distant galaxies' },
+                { icon: '🦌', names: ['Elk Herd', 'Caribou Migration', 'Antler Pride', 'Reindeer Valley', 'Deer Crossing', 'Majestic Elk', 'Buck Season', 'Antler Glory', 'Herd Movement', 'Wild Elk'], desc: 'Massive elk herds in mountain valleys' },
+                { icon: '🏔️', names: ['Matterhorn Vista', 'Swiss Alps', 'Rocky Mountains', 'Andes Peak', 'Mountain Glory', 'Peak Paradise', 'Alpine Dream', 'Mountain Majesty', 'Summit Beauty', 'Peak Vista'], desc: 'Iconic mountain peaks from around the world' },
+                { icon: '🌊', names: ['Great Barrier Reef', 'Reef Paradise', 'Coral Kingdom', 'Ocean Garden', 'Reef Wonder', 'Marine Paradise', 'Underwater World', 'Reef Colors', 'Ocean Treasure', 'Coral Beauty'], desc: 'Stunning coral reefs teeming with life' },
+                { icon: '🦅', names: ['Bald Eagle', 'Golden Eagle', 'Eagle Nest', 'Predator Bird', 'Sky King', 'Eagle Hunter', 'Mountain Eagle', 'Eagle Territory', 'Majestic Eagle', 'Eagle Pride'], desc: 'Powerful eagles ruling the skies' },
+                { icon: '🌸', names: ['Lotus Bloom', 'Water Lily', 'Sacred Flower', 'Lotus Pond', 'Pink Lotus', 'Floating Beauty', 'Zen Flower', 'Lotus Peace', 'Water Bloom', 'Lotus Garden'], desc: 'Serene lotus flowers floating on water' },
+                { icon: '🐧', names: ['Penguin Colony', 'Antarctic Life', 'Emperor Penguins', 'Ice Birds', 'Penguin Family', 'Southern Wildlife', 'Ice Walkers', 'Penguin March', 'Colony Life', 'Arctic Birds'], desc: 'Adorable penguins in icy landscapes' },
+                { icon: '🦒', names: ['Giraffe Savanna', 'Tall Beauty', 'African Plains', 'Giraffe Family', 'Savanna Life', 'Long Neck', 'Safari Wildlife', 'Giraffe Sunset', 'African Giants', 'Giraffe Grace'], desc: 'Graceful giraffes on African savannas' },
+                { icon: '🌺', names: ['Bird of Paradise', 'Exotic Bloom', 'Tropical Wonder', 'Paradise Flower', 'Jungle Jewel', 'Rare Flower', 'Exotic Beauty', 'Tropical Treasure', 'Jungle Bloom', 'Paradise Plant'], desc: 'Exotic birds of paradise flowers' },
+                { icon: '🦁', names: ['Lion Pride', 'King of Jungle', 'Savanna King', 'Lion Family', 'Pride Rock', 'Majestic Lion', 'Safari King', 'Lion Territory', 'Big Cat', 'Lion Roar'], desc: 'Powerful lions ruling the savanna' }
+            ];
+
+            const imgUrls = [
+                'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
+                'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80',
+                'https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=800&q=80',
+                'https://images.unsplash.com/photo-1522383225653-ed111181a951?w=800&q=80',
+                'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80',
+                'https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=800&q=80',
+                'https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800&q=80',
+                'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&q=80',
+                'https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?w=800&q=80',
+                'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?w=800&q=80',
+                'https://images.unsplash.com/photo-1511497584788-876760111969?w=800&q=80',
+                'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80',
+                'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80',
+                'https://images.unsplash.com/photo-1470058869958-2a77ade41c02?w=800&q=80',
+                'https://images.unsplash.com/photo-1484406566174-9da000fda645?w=800&q=80',
+                'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80',
+                'https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=800&q=80',
+                'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=800&q=80',
+                'https://images.unsplash.com/photo-1495567720989-cebdbdd97913?w=800&q=80',
+                'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=800&q=80',
+                'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80',
+                'https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=800&q=80',
+                'https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80',
+                'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&q=80',
+                'https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=800&q=80',
+                'https://images.unsplash.com/photo-1542435503-956c469947f6?w=800&q=80',
+                'https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?w=800&q=80',
+                'https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=800&q=80',
+                'https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=800&q=80',
+                'https://images.unsplash.com/photo-1504893524553-b855bce32c67?w=800&q=80'
+            ];
+
+            const photos = [];
+            for (let i = 0; i < 10000; i++) {
+                const category = categories[i % categories.length];
+                const nameIndex = Math.floor(i / categories.length) % category.names.length;
+                const variation = Math.floor(i / (categories.length * category.names.length)) + 1;
+                const name = category.names[nameIndex];
+                const suffix = variation > 1 ? ` ${variation}` : '';
+                
+                photos.push({
+                    icon: category.icon,
+                    title: `${name}${suffix}`,
+                    desc: category.desc,
+                    img: imgUrls[i % imgUrls.length]
+                });
+            }
+            return photos;
+        }
+
+        const photoData = generatePhotoData();
+
+        const defaultConfig = {
+            site_title: "NATURE PHOTOGRAPHY STUDIO",
+            gallery_title: "Premium 4K Nature Collection",
+            gallery_subtitle: "Explore breathtaking landscapes captured in stunning detail",
+            footer_text: "© 2024 Nature Photography Studio. All rights reserved.",
+            background_color: "#0a3d2e",
+            surface_color: "#1a5c47",
+            text_color: "#ffffff",
+            primary_action_color: "#2d7a5f",
+            secondary_action_color: "#4ade80"
+        };
+
+        function renderGallery() {
+            const gallery = document.getElementById('galleryGrid');
+            gallery.innerHTML = '';
+
+            photoData.forEach((photo, index) => {
+                const card = document.createElement('article');
+                card.className = 'photo-card';
+                card.innerHTML = `
+                    <div class="photo-container">
+                        <img class="photo-image" src="${photo.img}" alt="${photo.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="photo-emoji" style="display: none;">${photo.icon}</div>
+                        <div class="quality-badge">4K UHD</div>
+                    </div>
+                    <div class="photo-info">
+                        <div class="photo-number">#${String(index + 1).padStart(2, '0')}</div>
+                        <h2 class="photo-title">${photo.title}</h2>
+                        <p class="photo-description">${photo.desc}</p>
+                        <div class="button-group">
+                            <button class="view-button" onclick="viewPhoto(${index})">View 4K</button>
+                            <div class="download-icon" onclick="downloadPhoto(${index})" title="Download">⬇</div>
+                        </div>
+                    </div>
+                `;
+                gallery.appendChild(card);
+            });
+        }
+
+        function viewPhoto(index) {
+            const photo = photoData[index];
+            document.getElementById('modalIcon').textContent = photo.icon;
+            document.getElementById('modalTitle').textContent = photo.title;
+            document.getElementById('modalDescription').textContent = photo.desc;
+            document.getElementById('photoModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('photoModal').classList.remove('active');
+        }
+
+        async function downloadPhoto(index) {
+            const photo = photoData[index];
+            const downloadBtn = event.currentTarget;
+            
+            // Show loading state
+            downloadBtn.style.opacity = '0.5';
+            downloadBtn.style.pointerEvents = 'none';
+            
+            try {
+                // Fetch the image
+                const response = await fetch(photo.img);
+                const blob = await response.blob();
+                
+                // Create download link
+                const url = window.URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `${photo.title.replace(/\s+/g, '_')}_4K.jpg`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                window.URL.revokeObjectURL(url);
+                
+                // Show success message
+                showMessage(`✓ "${photo.title}" downloaded successfully!`, 'success');
+            } catch (error) {
+                // Show error message
+                showMessage(`✗ Failed to download "${photo.title}". Please try again.`, 'error');
+            } finally {
+                // Reset button state
+                downloadBtn.style.opacity = '1';
+                downloadBtn.style.pointerEvents = 'auto';
+            }
+        }
+
+        function showMessage(text, type) {
+            const message = document.createElement('div');
+            message.style.cssText = `
+                position: fixed;
+                bottom: 2rem;
+                right: 2rem;
+                background: ${type === 'success' ? 'rgba(74, 222, 128, 0.95)' : 'rgba(239, 68, 68, 0.95)'};
+                color: ${type === 'success' ? '#0a3d2e' : '#ffffff'};
+                padding: 1.5rem 2rem;
+                border-radius: 12px;
+                font-size: 1rem;
+                font-weight: 600;
+                z-index: 1001;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+                animation: slideIn 0.3s ease;
+            `;
+            message.textContent = text;
+            document.body.appendChild(message);
+
+            setTimeout(() => {
+                message.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => document.body.removeChild(message), 300);
+            }, 3000);
+        }
+
+        // Close modal on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // Close modal on background click
+        document.getElementById('photoModal').addEventListener('click', (e) => {
+            if (e.target.id === 'photoModal') closeModal();
+        });
+
+        async function onConfigChange(config) {
+            document.getElementById('siteTitle').textContent = config.site_title || defaultConfig.site_title;
+            document.getElementById('galleryTitle').textContent = config.gallery_title || defaultConfig.gallery_title;
+            document.getElementById('gallerySubtitle').textContent = config.gallery_subtitle || defaultConfig.gallery_subtitle;
+            document.getElementById('footerText').textContent = config.footer_text || defaultConfig.footer_text;
+
+            const backgroundColor = config.background_color || defaultConfig.background_color;
+            const surfaceColor = config.surface_color || defaultConfig.surface_color;
+            const textColor = config.text_color || defaultConfig.text_color;
+            const primaryActionColor = config.primary_action_color || defaultConfig.primary_action_color;
+            const secondaryActionColor = config.secondary_action_color || defaultConfig.secondary_action_color;
+
+            document.body.style.setProperty('--bg-color', backgroundColor);
+            document.body.style.setProperty('--surface-color', surfaceColor);
+            document.body.style.setProperty('--text-color', textColor);
+            document.body.style.setProperty('--primary-action', primaryActionColor);
+            document.body.style.setProperty('--secondary-action', secondaryActionColor);
+
+            const header = document.querySelector('header');
+            const footer = document.querySelector('footer');
+            
+            document.querySelectorAll('.photo-container').forEach(container => {
+                container.style.background = `linear-gradient(135deg, ${surfaceColor} 0%, ${primaryActionColor} 100%)`;
+            });
+
+            document.querySelectorAll('.view-button').forEach(button => {
+                button.style.background = `linear-gradient(135deg, ${primaryActionColor} 0%, ${surfaceColor} 100%)`;
+            });
+
+            document.querySelectorAll('.quality-badge').forEach(badge => {
+                badge.style.color = secondaryActionColor;
+                badge.style.borderColor = `${secondaryActionColor}50`;
+            });
+        }
+
+        function mapToCapabilities(config) {
+            return {
+                recolorables: [
+                    {
+                        get: () => config.background_color || defaultConfig.background_color,
+                        set: (value) => {
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ background_color: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.surface_color || defaultConfig.surface_color,
+                        set: (value) => {
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ surface_color: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.text_color || defaultConfig.text_color,
+                        set: (value) => {
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ text_color: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.primary_action_color || defaultConfig.primary_action_color,
+                        set: (value) => {
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ primary_action_color: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+                        set: (value) => {
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ secondary_action_color: value });
+                            }
+                        }
+                    }
+                ],
+                borderables: [],
+                fontEditable: undefined,
+                fontSizeable: undefined
+            };
+        }
+
+        function mapToEditPanelValues(config) {
+            return new Map([
+                ["site_title", config.site_title || defaultConfig.site_title],
+                ["gallery_title", config.gallery_title || defaultConfig.gallery_title],
+                ["gallery_subtitle", config.gallery_subtitle || defaultConfig.gallery_subtitle],
+                ["footer_text", config.footer_text || defaultConfig.footer_text]
+            ]);
+        }
+
+        // Initialize
+        renderGallery();
+
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig,
+                onConfigChange,
+                mapToCapabilities,
+                mapToEditPanelValues
+            });
+        }
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a10854621cf8ef1',t:'MTc2MzU2MzgzMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
